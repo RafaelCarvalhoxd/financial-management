@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/RafaelCarvalhoxd/financial-mangement/internal/auth"
+	"github.com/RafaelCarvalhoxd/financial-mangement/internal/apps/auth"
 	"github.com/RafaelCarvalhoxd/financial-mangement/internal/http/routes"
 	"github.com/gin-gonic/gin"
 )
@@ -18,7 +18,6 @@ func Config(deps *Dependencies) *gin.Engine {
 	api := r.Group("/api")
 	{
 		routes.SetupAuthRoutes(api, deps.AuthHandler)
-
 	}
 
 	return r

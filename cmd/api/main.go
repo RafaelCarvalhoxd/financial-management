@@ -3,11 +3,11 @@ package main
 import (
 	"log"
 
-	"github.com/RafaelCarvalhoxd/financial-mangement/internal/auth"
+	"github.com/RafaelCarvalhoxd/financial-mangement/internal/apps/auth"
+	"github.com/RafaelCarvalhoxd/financial-mangement/internal/apps/user"
 	"github.com/RafaelCarvalhoxd/financial-mangement/internal/config"
 	"github.com/RafaelCarvalhoxd/financial-mangement/internal/database"
 	"github.com/RafaelCarvalhoxd/financial-mangement/internal/http/server"
-	"github.com/RafaelCarvalhoxd/financial-mangement/internal/user"
 	"github.com/joho/godotenv"
 )
 
