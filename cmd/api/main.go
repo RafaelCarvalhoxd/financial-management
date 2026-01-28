@@ -5,10 +5,11 @@ import (
 
 	"github.com/RafaelCarvalhoxd/financial-management/internal/auth"
 	"github.com/RafaelCarvalhoxd/financial-management/internal/category"
-	"github.com/RafaelCarvalhoxd/financial-management/internal/user"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/http"
 	"github.com/RafaelCarvalhoxd/financial-management/internal/infra/config"
 	"github.com/RafaelCarvalhoxd/financial-management/internal/infra/database"
-	"github.com/RafaelCarvalhoxd/financial-management/internal/http"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/transaction"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/user"
 	"github.com/joho/godotenv"
 )
 
@@ -34,9 +35,14 @@ func main() {
 	categoryService := category.NewService(categoryRepo)
 	categoryHandler := category.NewHandler(categoryService)
 
+	transactionRepo := transaction.NewRepository(db)
+	transactionService := transaction.NewService(transactionRepo)
+	transactionHandler := transaction.NewHandler(transactionService)
+
 	deps := &http.Dependencies{
-		AuthHandler:     authHandler,
-		CategoryHandler: categoryHandler,
+		AuthHandler:        authHandler,
+		CategoryHandler:    categoryHandler,
+		TransactionHandler: transactionHandler,
 	}
 	router := http.Config(deps)
 	port := ":" + cfg.Port
