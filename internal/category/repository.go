@@ -38,7 +38,7 @@ func (r *Repository) Create(ctx context.Context, name string, userID int) (*Cate
 	)
 
 	if err != nil {
-		log.Printf("Erro ao criar categoria no banco de dados: %v", err)
+		log.Printf("Error creating category in database: %v", err)
 		return nil, apperrors.ErrInternalServerError
 	}
 
@@ -54,7 +54,7 @@ func (r *Repository) FindAll(ctx context.Context, userID int) ([]*Category, erro
 
 	rows, err := r.db.Query(ctx, query, userID)
 	if err != nil {
-		log.Printf("Erro ao buscar categorias no banco de dados: %v", err)
+		log.Printf("Error fetching categories from database: %v", err)
 		return nil, apperrors.ErrInternalServerError
 	}
 	defer rows.Close()
@@ -63,7 +63,7 @@ func (r *Repository) FindAll(ctx context.Context, userID int) ([]*Category, erro
 		var category Category
 		err := rows.Scan(&category.ID, &category.Name, &category.UserID, &category.CreatedAt, &category.UpdatedAt)
 		if err != nil {
-			log.Printf("Erro ao scanear categoria: %v", err)
+			log.Printf("Error scanning category: %v", err)
 			return nil, apperrors.ErrInternalServerError
 		}
 		categories = append(categories, &category)
@@ -84,7 +84,7 @@ func (r *Repository) FindByID(ctx context.Context, id int, userID int) (*Categor
 		if errors.Is(err, pgx.ErrNoRows) {
 			return nil, nil
 		}
-		log.Printf("Erro ao buscar categoria por ID no banco de dados: %v", err)
+		log.Printf("Error fetching category by ID from database: %v", err)
 		return nil, apperrors.ErrInternalServerError
 	}
 
@@ -102,7 +102,7 @@ func (r *Repository) Update(ctx context.Context, id int, name string, userID int
 
 	err := r.db.QueryRow(ctx, query, name, now, id, userID).Scan(&category.ID, &category.Name, &category.UserID, &category.CreatedAt, &category.UpdatedAt)
 	if err != nil {
-		log.Printf("Erro ao atualizar categoria no banco de dados: %v", err)
+		log.Printf("Error updating category in database: %v", err)
 		return nil, apperrors.ErrInternalServerError
 	}
 
@@ -116,7 +116,7 @@ func (r *Repository) Delete(ctx context.Context, id int, userID int) error {
 
 	_, err := r.db.Exec(ctx, query, id, userID)
 	if err != nil {
-		log.Printf("Erro ao deletar categoria no banco de dados: %v", err)
+		log.Printf("Error deleting category from database: %v", err)
 		return apperrors.ErrInternalServerError
 	}
 
@@ -135,7 +135,7 @@ func (r *Repository) FindByName(ctx context.Context, name string, userID int) (*
 		if errors.Is(err, pgx.ErrNoRows) {
 			return nil, nil
 		}
-		log.Printf("Erro ao buscar categoria por nome no banco de dados: %v", err)
+		log.Printf("Error fetching category by name from database: %v", err)
 		return nil, apperrors.ErrInternalServerError
 	}
 

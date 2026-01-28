@@ -49,7 +49,7 @@ func (r *Repository) Create(ctx context.Context, name, email, password string) (
 	)
 
 	if err != nil {
-		log.Printf("Erro ao criar usuário no banco de dados: %v", err)
+		log.Printf("Error creating user in database: %v", err)
 		return nil, apperrors.ErrInternalServerError
 	}
 
@@ -76,7 +76,7 @@ func (r *Repository) FindByEmail(ctx context.Context, email string) (*User, erro
 		if errors.Is(err, pgx.ErrNoRows) {
 			return nil, nil
 		}
-		log.Printf("Erro ao buscar usuário no banco de dados: %v", err)
+		log.Printf("Error fetching user from database: %v", err)
 		return nil, apperrors.ErrInternalServerError
 	}
 

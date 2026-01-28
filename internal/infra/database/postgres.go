@@ -21,15 +21,15 @@ func NewPostgres(cfg *config.Config) (*pgxpool.Pool, error) {
 
 	pool, err := pgxpool.New(context.Background(), dsn)
 	if err != nil {
-		return nil, fmt.Errorf("erro ao criar pool de conexões: %w", err)
+		return nil, fmt.Errorf("error creating connection pool: %w", err)
 	}
 
 	if err := pool.Ping(context.Background()); err != nil {
 		pool.Close()
-		return nil, fmt.Errorf("erro ao conectar ao banco de dados: %w", err)
+		return nil, fmt.Errorf("error connecting to database: %w", err)
 	}
 
-	log.Printf("Conexão estabelecida com sucesso ao PostgreSQL: host=%s port=%s dbname=%s user=%s",
+	log.Printf("Successfully connected to PostgreSQL: host=%s port=%s dbname=%s user=%s",
 		cfg.PostgresHost, cfg.PostgresPort, cfg.PostgresDB, cfg.PostgresUser)
 
 	return pool, nil

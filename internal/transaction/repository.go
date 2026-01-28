@@ -49,7 +49,7 @@ func (r *Repository) FindByID(ctx context.Context, id int, userID int) (*Transac
 		if errors.Is(err, pgx.ErrNoRows) {
 			return nil, nil
 		}
-		log.Printf("Erro ao buscar transação no banco de dados: %v", err)
+		log.Printf("Error fetching transaction from database: %v", err)
 		return nil, apperrors.ErrInternalServerError
 	}
 
@@ -80,7 +80,7 @@ func (r *Repository) Create(ctx context.Context, description string, amount floa
 	).Scan(&id)
 
 	if err != nil {
-		log.Printf("Erro ao criar transação no banco de dados: %v", err)
+		log.Printf("Error creating transaction in database: %v", err)
 		return nil, apperrors.ErrInternalServerError
 	}
 
@@ -102,7 +102,7 @@ func (r *Repository) FindAll(ctx context.Context, userID int, year *int, month *
 
 	rows, err := r.db.Query(ctx, query, userID, year, month)
 	if err != nil {
-		log.Printf("Erro ao buscar transações no banco de dados: %v", err)
+		log.Printf("Error fetching transactions from database: %v", err)
 		return nil, apperrors.ErrInternalServerError
 	}
 	defer rows.Close()
@@ -122,7 +122,7 @@ func (r *Repository) FindAll(ctx context.Context, userID int, year *int, month *
 			&transaction.UpdatedAt,
 		)
 		if err != nil {
-			log.Printf("Erro ao scanear transação: %v", err)
+			log.Printf("Error scanning transaction: %v", err)
 			return nil, apperrors.ErrInternalServerError
 		}
 		transactions = append(transactions, &transaction)
@@ -171,7 +171,7 @@ func (r *Repository) Update(ctx context.Context, id int, userID int, description
 
 	_, err := r.db.Exec(ctx, query, args...)
 	if err != nil {
-		log.Printf("Erro ao atualizar transação no banco de dados: %v", err)
+		log.Printf("Error updating transaction in database: %v", err)
 		return nil, apperrors.ErrInternalServerError
 	}
 
@@ -185,7 +185,7 @@ func (r *Repository) Delete(ctx context.Context, id int, userID int) error {
 
 	_, err := r.db.Exec(ctx, query, id, userID)
 	if err != nil {
-		log.Printf("Erro ao deletar transação no banco de dados: %v", err)
+		log.Printf("Error deleting transaction from database: %v", err)
 		return apperrors.ErrInternalServerError
 	}
 

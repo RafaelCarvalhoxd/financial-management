@@ -16,14 +16,14 @@ import (
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Erro ao carregar arquivo .env:", err)
+		log.Fatal("Error loading .env file:", err)
 	}
 
 	cfg := config.NewConfig()
 
 	db, err := database.NewPostgres(cfg)
 	if err != nil {
-		log.Fatal("Erro ao conectar ao banco de dados:", err)
+		log.Fatal("Error connecting to database:", err)
 	}
 	defer db.Close()
 
@@ -47,9 +47,9 @@ func main() {
 	router := http.Config(deps)
 	port := ":" + cfg.Port
 
-	log.Printf("Iniciando servidor na porta %s...", port)
+	log.Printf("Starting server on port %s...", port)
 
 	if err := router.Run(port); err != nil {
-		log.Fatal("Erro ao iniciar servidor:", err)
+		log.Fatal("Error starting server:", err)
 	}
 }

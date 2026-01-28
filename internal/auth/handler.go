@@ -18,7 +18,7 @@ func NewHandler(service *Service) *Handler {
 func (h *Handler) Register(c *gin.Context) {
 	var req RegisterRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(400, gin.H{"error": "Erro ao decodificar requisição"})
+		c.JSON(400, gin.H{"error": "Failed to decode request"})
 		return
 	}
 
@@ -40,7 +40,7 @@ func (h *Handler) Register(c *gin.Context) {
 func (h *Handler) Login(c *gin.Context) {
 	var req LoginRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(400, gin.H{"error": "Erro ao decodificar requisição"})
+		c.JSON(400, gin.H{"error": "Failed to decode request"})
 		return
 	}
 

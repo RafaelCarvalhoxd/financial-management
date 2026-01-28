@@ -20,7 +20,7 @@ func NewHandler(service *Service) *Handler {
 func (h *Handler) CreateCategory(c *gin.Context) {
 	var req CreateCategoryRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(400, gin.H{"error": "Erro ao decodificar requisição"})
+		c.JSON(400, gin.H{"error": "Failed to decode request"})
 		return
 	}
 
@@ -43,13 +43,13 @@ func (h *Handler) UpdateCategory(c *gin.Context) {
 	var req UpdateCategoryRequest
 
 	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(400, gin.H{"error": "Erro ao decodificar requisição"})
+		c.JSON(400, gin.H{"error": "Failed to decode request"})
 		return
 	}
 	id := c.Param("id")
 	categoryID, err := strconv.Atoi(id)
 	if err != nil {
-		c.JSON(400, gin.H{"error": "ID inválido"})
+		c.JSON(400, gin.H{"error": "Invalid ID"})
 		return
 	}
 	ctx := c.Request.Context()
@@ -93,7 +93,7 @@ func (h *Handler) GetCategory(c *gin.Context) {
 	ctx := c.Request.Context()
 	categoryID, err := strconv.Atoi(id)
 	if err != nil {
-		c.JSON(400, gin.H{"error": "ID inválido"})
+		c.JSON(400, gin.H{"error": "Invalid ID"})
 		return
 	}
 	category, err := h.service.FindByID(ctx, categoryID, 1)
@@ -115,7 +115,7 @@ func (h *Handler) DeleteCategory(c *gin.Context) {
 	ctx := c.Request.Context()
 	categoryID, err := strconv.Atoi(id)
 	if err != nil {
-		c.JSON(400, gin.H{"error": "ID inválido"})
+		c.JSON(400, gin.H{"error": "Invalid ID"})
 		return
 	}
 	err = h.service.Delete(ctx, categoryID, 1)
@@ -124,5 +124,5 @@ func (h *Handler) DeleteCategory(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, gin.H{"message": "Categoria deletada com sucesso"})
+	c.JSON(200, gin.H{"message": "Category deleted successfully"})
 }

@@ -36,7 +36,7 @@ func GenerateToken(userID int, email, secret string) (string, error) {
 func ValidateToken(tokenString, secret string) (*Claims, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, errors.New("método de assinatura inválido")
+			return nil, errors.New("invalid signing method")
 		}
 		return []byte(secret), nil
 	})
@@ -49,5 +49,5 @@ func ValidateToken(tokenString, secret string) (*Claims, error) {
 		return claims, nil
 	}
 
-	return nil, errors.New("token inválido")
+	return nil, errors.New("invalid token")
 }

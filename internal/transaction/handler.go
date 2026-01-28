@@ -21,7 +21,7 @@ func NewHandler(service *Service) *Handler {
 func (h *Handler) CreateTransaction(c *gin.Context) {
 	var request CreateTransactionRequest
 	if err := c.ShouldBindBodyWithJSON(&request); err != nil {
-		c.JSON(400, gin.H{"error": "Erro ao decodificar requisição"})
+		c.JSON(400, gin.H{"error": "Failed to decode request"})
 		return
 	}
 
@@ -49,7 +49,7 @@ func (h *Handler) GetTransaction(c *gin.Context) {
 	ctx := c.Request.Context()
 	transactionID, err := strconv.Atoi(id)
 	if err != nil {
-		c.JSON(400, gin.H{"error": "ID inválido"})
+		c.JSON(400, gin.H{"error": "Invalid ID"})
 		return
 	}
 	transaction, err := h.service.FindByID(ctx, transactionID, 1)
@@ -77,7 +77,7 @@ func (h *Handler) GetTransactions(c *gin.Context) {
 	if yearStr := c.Query("year"); yearStr != "" {
 		y, err := strconv.Atoi(yearStr)
 		if err != nil || y <= 0 {
-			c.JSON(400, gin.H{"error": "Parâmetro 'year' inválido"})
+			c.JSON(400, gin.H{"error": "Invalid 'year' parameter"})
 			return
 		}
 		year = &y
@@ -85,14 +85,14 @@ func (h *Handler) GetTransactions(c *gin.Context) {
 	if monthStr := c.Query("month"); monthStr != "" {
 		m, err := strconv.Atoi(monthStr)
 		if err != nil || m < 1 || m > 12 {
-			c.JSON(400, gin.H{"error": "Parâmetro 'month' inválido (1-12)"})
+			c.JSON(400, gin.H{"error": "Invalid 'month' parameter (1-12)"})
 			return
 		}
 		month = &m
 	}
 
 	if (year != nil && month == nil) || (year == nil && month != nil) {
-		c.JSON(400, gin.H{"error": "Os parâmetros 'year' e 'month' devem ser fornecidos juntos"})
+		c.JSON(400, gin.H{"error": "Parameters 'year' and 'month' must be provided together"})
 		return
 	}
 
@@ -149,12 +149,12 @@ func (h *Handler) UpdateTransaction(c *gin.Context) {
 	ctx := c.Request.Context()
 	transactionID, err := strconv.Atoi(id)
 	if err != nil {
-		c.JSON(400, gin.H{"error": "ID inválido"})
+		c.JSON(400, gin.H{"error": "Invalid ID"})
 		return
 	}
 	var request UpdateTransactionRequest
 	if err := c.ShouldBindBodyWithJSON(&request); err != nil {
-		c.JSON(400, gin.H{"error": "Erro ao decodificar requisição"})
+		c.JSON(400, gin.H{"error": "Failed to decode request"})
 		return
 	}
 	transaction, err := h.service.Update(ctx, transactionID, 1, request.Description, request.Amount, request.Date, request.Type, request.CategoryID)
@@ -179,7 +179,7 @@ func (h *Handler) DeleteTransaction(c *gin.Context) {
 	ctx := c.Request.Context()
 	transactionID, err := strconv.Atoi(id)
 	if err != nil {
-		c.JSON(400, gin.H{"error": "ID inválido"})
+		c.JSON(400, gin.H{"error": "Invalid ID"})
 		return
 	}
 	err = h.service.Delete(ctx, transactionID, 1)
@@ -187,5 +187,5 @@ func (h *Handler) DeleteTransaction(c *gin.Context) {
 		helpers.HandleError(c, err)
 		return
 	}
-	c.JSON(200, gin.H{"message": "Transação deletada com sucesso"})
+	c.JSON(200, gin.H{"message": "Transaction deleted successfully"})
 }
