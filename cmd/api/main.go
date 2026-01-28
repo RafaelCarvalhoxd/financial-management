@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/RafaelCarvalhoxd/financial-mangement/internal/apps/auth"
+	"github.com/RafaelCarvalhoxd/financial-mangement/internal/apps/category"
 	"github.com/RafaelCarvalhoxd/financial-mangement/internal/apps/user"
 	"github.com/RafaelCarvalhoxd/financial-mangement/internal/config"
 	"github.com/RafaelCarvalhoxd/financial-mangement/internal/database"
@@ -29,8 +30,13 @@ func main() {
 	authService := auth.NewService(userRepo, cfg.JWTSecret)
 	authHandler := auth.NewHandler(authService)
 
+	categoryRepo := category.NewRepository(db)
+	categoryService := category.NewService(categoryRepo)
+	categoryHandler := category.NewHandler(categoryService)
+
 	deps := &server.Dependencies{
-		AuthHandler: authHandler,
+		AuthHandler:     authHandler,
+		CategoryHandler: categoryHandler,
 	}
 	router := server.Config(deps)
 	port := ":" + cfg.Port
