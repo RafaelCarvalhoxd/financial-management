@@ -31,7 +31,12 @@ func (h *Handler) CreateCategory(c *gin.Context) {
 		return
 	}
 
-	c.JSON(201, category)
+	c.JSON(201, CategoryResponse{
+		ID:        category.ID,
+		Name:      category.Name,
+		CreatedAt: category.CreatedAt,
+		UpdatedAt: category.UpdatedAt,
+	})
 }
 
 func (h *Handler) UpdateCategory(c *gin.Context) {
@@ -54,7 +59,12 @@ func (h *Handler) UpdateCategory(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, category)
+	c.JSON(200, CategoryResponse{
+		ID:        category.ID,
+		Name:      category.Name,
+		CreatedAt: category.CreatedAt,
+		UpdatedAt: category.UpdatedAt,
+	})
 }
 
 func (h *Handler) GetCategories(c *gin.Context) {
@@ -65,7 +75,17 @@ func (h *Handler) GetCategories(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, categories)
+	responses := []CategoryResponse{}
+	for _, category := range categories {
+		responses = append(responses, CategoryResponse{
+			ID:        category.ID,
+			Name:      category.Name,
+			CreatedAt: category.CreatedAt,
+			UpdatedAt: category.UpdatedAt,
+		})
+	}
+
+	c.JSON(200, responses)
 }
 
 func (h *Handler) GetCategory(c *gin.Context) {
@@ -82,7 +102,12 @@ func (h *Handler) GetCategory(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, category)
+	c.JSON(200, CategoryResponse{
+		ID:        category.ID,
+		Name:      category.Name,
+		CreatedAt: category.CreatedAt,
+		UpdatedAt: category.UpdatedAt,
+	})
 }
 
 func (h *Handler) DeleteCategory(c *gin.Context) {
