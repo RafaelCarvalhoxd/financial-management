@@ -1,20 +1,17 @@
 package auth
 
 import (
-	"github.com/RafaelCarvalhoxd/financial-mangement/internal/config"
 	"github.com/RafaelCarvalhoxd/financial-mangement/internal/http/helpers"
 	"github.com/gin-gonic/gin"
 )
 
 type Handler struct {
 	service *Service
-	config  *config.Config
 }
 
-func NewHandler(service *Service, cfg *config.Config) *Handler {
+func NewHandler(service *Service) *Handler {
 	return &Handler{
 		service: service,
-		config:  cfg,
 	}
 }
 
@@ -48,7 +45,7 @@ func (h *Handler) Login(c *gin.Context) {
 	}
 
 	ctx := c.Request.Context()
-	token, err := h.service.Login(ctx, req.Email, req.Password, h.config.JWTSecret)
+	token, err := h.service.Login(ctx, req.Email, req.Password)
 	if err != nil {
 		helpers.HandleError(c, err)
 		return

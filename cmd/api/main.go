@@ -26,8 +26,8 @@ func main() {
 	defer db.Close()
 
 	userRepo := user.NewRepository(db)
-	authService := auth.NewService(userRepo)
-	authHandler := auth.NewHandler(authService, cfg)
+	authService := auth.NewService(userRepo, cfg.JWTSecret)
+	authHandler := auth.NewHandler(authService)
 
 	deps := &server.Dependencies{
 		AuthHandler: authHandler,
