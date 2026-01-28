@@ -1,4 +1,4 @@
-module github.com/RafaelCarvalhoxd/financial-mangement
+module github.com/RafaelCarvalhoxd/financial-management
 
 go 1.25.5
 

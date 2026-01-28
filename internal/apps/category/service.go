@@ -3,7 +3,7 @@ package category
 import (
 	"context"
 
-	apperrors "github.com/RafaelCarvalhoxd/financial-mangement/internal/errors"
+	apperrors "github.com/RafaelCarvalhoxd/financial-management/internal/errors"
 )
 
 type Service struct {

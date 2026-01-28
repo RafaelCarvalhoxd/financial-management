@@ -1,9 +1,9 @@
 package server
 
 import (
-	"github.com/RafaelCarvalhoxd/financial-mangement/internal/apps/auth"
-	"github.com/RafaelCarvalhoxd/financial-mangement/internal/apps/category"
-	"github.com/RafaelCarvalhoxd/financial-mangement/internal/http/routes"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/apps/auth"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/apps/category"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/http/routes"
 	"github.com/gin-gonic/gin"
 )
 

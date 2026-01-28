@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/RafaelCarvalhoxd/financial-mangement/internal/config"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/config"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 

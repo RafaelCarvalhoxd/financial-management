@@ -3,7 +3,7 @@ package category
 import (
 	"strconv"
 
-	"github.com/RafaelCarvalhoxd/financial-mangement/internal/http/helpers"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/http/helpers"
 	"github.com/gin-gonic/gin"
 )
 

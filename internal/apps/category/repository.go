@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	apperrors "github.com/RafaelCarvalhoxd/financial-mangement/internal/errors"
+	apperrors "github.com/RafaelCarvalhoxd/financial-management/internal/errors"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )

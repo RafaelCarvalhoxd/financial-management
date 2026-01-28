@@ -3,8 +3,8 @@ package auth
 import (
 	"context"
 
-	"github.com/RafaelCarvalhoxd/financial-mangement/internal/apps/user"
-	"github.com/RafaelCarvalhoxd/financial-mangement/internal/errors"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/apps/user"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/errors"
 )
 
 type Service struct {

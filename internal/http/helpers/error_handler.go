@@ -3,7 +3,7 @@ package helpers
 import (
 	"log"
 
-	"github.com/RafaelCarvalhoxd/financial-mangement/internal/errors"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/errors"
 	"github.com/gin-gonic/gin"
 )
 
