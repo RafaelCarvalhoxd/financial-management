@@ -3,12 +3,12 @@ package main
 import (
 	"log"
 
-	"github.com/RafaelCarvalhoxd/financial-management/internal/apps/auth"
-	"github.com/RafaelCarvalhoxd/financial-management/internal/apps/category"
-	"github.com/RafaelCarvalhoxd/financial-management/internal/apps/user"
-	"github.com/RafaelCarvalhoxd/financial-management/internal/config"
-	"github.com/RafaelCarvalhoxd/financial-management/internal/database"
-	"github.com/RafaelCarvalhoxd/financial-management/internal/http/server"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/auth"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/category"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/user"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/infra/config"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/infra/database"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/http"
 	"github.com/joho/godotenv"
 )
 
@@ -34,11 +34,11 @@ func main() {
 	categoryService := category.NewService(categoryRepo)
 	categoryHandler := category.NewHandler(categoryService)
 
-	deps := &server.Dependencies{
+	deps := &http.Dependencies{
 		AuthHandler:     authHandler,
 		CategoryHandler: categoryHandler,
 	}
-	router := server.Config(deps)
+	router := http.Config(deps)
 	port := ":" + cfg.Port
 
 	log.Printf("Iniciando servidor na porta %s...", port)

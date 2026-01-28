@@ -1,8 +1,8 @@
-package server
+package http
 
 import (
-	"github.com/RafaelCarvalhoxd/financial-management/internal/apps/auth"
-	"github.com/RafaelCarvalhoxd/financial-management/internal/apps/category"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/auth"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/category"
 	"github.com/RafaelCarvalhoxd/financial-management/internal/http/routes"
 	"github.com/gin-gonic/gin"
 )

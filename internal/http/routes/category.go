@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/RafaelCarvalhoxd/financial-management/internal/apps/category"
+	"github.com/RafaelCarvalhoxd/financial-management/internal/category"
 	"github.com/gin-gonic/gin"
 )
 
