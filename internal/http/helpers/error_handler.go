@@ -12,9 +12,9 @@ func HandleError(c *gin.Context, err error) {
 
 	switch err {
 	case errors.ErrConflict:
-		c.JSON(409, gin.H{"error": "Email já cadastrado"})
+		c.JSON(409, gin.H{"error": "Recurso já existe"})
 	case errors.ErrNotFound:
-		c.JSON(404, gin.H{"error": "Usuário não encontrado"})
+		c.JSON(404, gin.H{"error": "Recurso não encontrado"})
 	case errors.ErrUnauthorized:
 		c.JSON(401, gin.H{"error": "Credenciais inválidas"})
 	case errors.ErrInvalidInput:
